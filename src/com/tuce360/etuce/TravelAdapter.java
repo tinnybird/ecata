@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import com.aphidmobile.utils.AphidLog;
 import com.aphidmobile.utils.IO;
 import com.aphidmobile.utils.UI;
-import com.example.ecata.R;
+import com.tuce360.ecata.R;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +24,23 @@ public class TravelAdapter extends BaseAdapter {
 
   private int repeatCount = 1;
 
-  private List<Travels.Data> travelData;
+  private List<Data> travelData;
 
   public TravelAdapter(Context context) {
     inflater = LayoutInflater.from(context);
-    travelData = new ArrayList<Travels.Data>(Travels.IMG_DESCRIPTIONS);
+    travelData = new ArrayList<Data>();
+    try { 
+        InputStreamReader inputReader = new InputStreamReader( context.getAssets().open("list.txt"));
+        BufferedReader bufReader = new BufferedReader(inputReader);
+        String line="";
+        String Result="";
+        while((line = bufReader.readLine()) != null)
+        	 travelData.add(new Data(line));
+            Result += line;
+    } catch (Exception e) { 
+        e.printStackTrace(); 
+    }          
+    
   }
 
   @Override
@@ -59,7 +74,7 @@ public class TravelAdapter extends BaseAdapter {
       AphidLog.d("created new view from adapter: %d", position);
     }
 
-    final Travels.Data data = travelData.get(position % travelData.size());
+    final Data data = travelData.get(position % travelData.size());
     UI
         .<ImageView>findViewById(layout, R.id.photo)
         .setImageBitmap(IO.readBitmap(inflater.getContext().getAssets(), data.imageFilename));
@@ -71,4 +86,13 @@ public class TravelAdapter extends BaseAdapter {
       travelData.remove(index);
     }
   }
+  
+  public static final class Data {
+	    public final String imageFilename;
+
+	    Data(String imageFilename) {
+	      this.imageFilename = imageFilename;
+
+	    }
+	  }
 }
