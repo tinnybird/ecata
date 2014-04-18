@@ -1,4 +1,4 @@
-package com.example.ecata;
+package com.tuce360.etuce;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.aphidmobile.utils.AphidLog;
 import com.aphidmobile.utils.IO;
 import com.aphidmobile.utils.UI;
+import com.example.ecata.R;
 
 import java.util.ArrayList;
 import java.util.List;

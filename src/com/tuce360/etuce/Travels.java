@@ -1,4 +1,4 @@
-package com.example.ecata;
+package com.tuce360.etuce;
 
 import java.util.ArrayList;
 import java.util.List;

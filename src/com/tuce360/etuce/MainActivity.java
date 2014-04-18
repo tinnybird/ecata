@@ -1,8 +1,11 @@
-package com.example.ecata;
+package com.tuce360.etuce;
 
 import android.support.v7.app.ActionBarActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import com.aphidmobile.flip.FlipViewController;
 
 public class MainActivity extends ActionBarActivity {
@@ -11,8 +14,9 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		flipView =new FlipViewController(this);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		flipView =new FlipViewController(this,FlipViewController.HORIZONTAL);
 		flipView.setAnimationBitmapFormat(Bitmap.Config.RGB_565);
 		flipView.setAdapter(new TravelAdapter(this));
 		
